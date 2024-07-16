@@ -4,7 +4,7 @@ const paisDiv = document.getElementById("pais");
 async function obtenerpais() {
     try {
         const response = await axios.get(apiUrl);
-        const pais = response.data.slice(-20); // Get the last 20 countries
+        const pais = response.data.slice(-20); 
         
         let paisHtml = '';
 
