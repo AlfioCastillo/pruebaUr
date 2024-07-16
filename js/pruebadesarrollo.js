@@ -3,6 +3,9 @@ const apiUrl = "https://restcountries.com/v3.1/all";
 const paisDiv = document.getElementById("pais");
 console.log(paisDiv);
 
+
+
+
 async function obtenerpais() {
     try {
         const response = await axios.get(apiUrl);
