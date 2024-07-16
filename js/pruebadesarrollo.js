@@ -1,32 +1,32 @@
 const apiUrl = "https://restcountries.com/v3.1/all";
-
 const paisDiv = document.getElementById("pais");
-console.log(paisDiv);
-
-
-
 
 async function obtenerpais() {
     try {
         const response = await axios.get(apiUrl);
-        const pais = response.data.slice(0, 20);
+        const pais = response.data.slice(-20); // Get the last 20 countries
+        
+        let paisHtml = '';
 
-        pais.forEach((comentario) => {
-            const comentarioElement = document.createElement("div");
-            comentarioElement.innerHTML = `
-            <h2>${comentario.name.common}</h2>
-            <h3>Región: ${comentario.region}</h3>
-            <img src="${comentario.flags.svg}" alt="Flag of ${comentario.name.common}">
-          <a href="">Región: ${comentario.region}</a>
-            <hr>
-        `;
-            paisDiv.appendChild(comentarioElement);
+        pais.forEach((country) => {
+            paisHtml += `
+                <div>
+                    <h2>${country.name.common}</h2>
+                    <h3>Región: ${country.region}</h3>
+                    <img src="${country.flags.svg}" alt="Flag of ${country.name.common}">
+                    <a href="#" onclick="alert('Más sobre ${country.name.common}')">Más información</a>
+                    <hr>
+                </div>
+            `;
         });
+
+        paisDiv.innerHTML = paisHtml;
+
     } catch (error) {
         console.error("Error al obtener pais:", error);
+        paisDiv.innerHTML = "<p>Error al cargar los países. Intenta nuevamente más tarde.</p>";
     }
 }
-obtenerpais();
 //FORMULARIO
 document.getElementById("preventDefault").addEventListener("submit", function (event) {
     const form = event.target;
